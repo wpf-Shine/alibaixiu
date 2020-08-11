@@ -11,8 +11,9 @@ $("#userForm").on("submit", function (){
 			//刷新页面
 			location.reload();
 		},
-		error: function (){
-			alert('用户添加失败！');
+		error: function (xhr){
+			var err = JSON.parse(xhr.responseText).message;
+			$(".alert-error").show().html("<strong>错误！</strong>" + err);
 		}
 	})
 	//阻止表单的默认提交行为
@@ -38,7 +39,7 @@ $("#modifyBox").on("change", "#avatar", function (){
 			$("#hiddenAvatar").val(response[0].avatar);
 		},
 		error: function(){
-			alert("文件上传失败");
+			$(".alert-error").show().html("<strong>错误！</strong> 文件上传失败");
 		}
 	})
 });
@@ -82,6 +83,10 @@ $("#modifyBox").on('submit', "#modifyForm", function (){
 		data: formData,
 		success: function (response){
 			location.reload();
+		},
+		error: function (xhr){
+			var err = JSON.parse(xhr.responseText).message;
+			$(".alert-error").show().html("<strong>错误！</strong>" + err);
 		}
 	})
 	//阻止表单默认提交

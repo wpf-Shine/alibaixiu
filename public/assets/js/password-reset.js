@@ -8,8 +8,8 @@ $("#modifyForm").on("submit", function (){
 			location.href = "/admin/login.html";
 		},
 		error: function (xhr){
-			var message = JSON.parse(xhr.responseText).message;
-			alert(message);
+			var err = JSON.parse(xhr.responseText).message;
+			$(".alert-error").show().html("<strong>错误！</strong>" + err);
 		}
 	})
 	return false;
