@@ -1,6 +1,5 @@
 $("#modifyForm").on("submit", function (){
 	var formData = $(this).serialize();
-	console.log(formData);
 	$.ajax({
 		type: 'put',
 		url: '/users/password',

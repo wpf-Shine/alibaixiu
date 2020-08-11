@@ -108,9 +108,9 @@ selectAll.on("change", function (){
 	//获取到全选按钮当前的状态
 	var status = $(this).prop("checked");
 	if(status){
-		$("#bulkDelete").show();
+		$("#bulkDelete").attr("disabled", false);
 	}else{
-		$("#bulkDelete").hide();
+		$("#bulkDelete").attr("disabled", true);
 	}
 	//获取到所有用户并将用户的状态和全选按钮保持一致
 	$("#userBox").find("input").prop("checked", status);
@@ -128,9 +128,9 @@ $("#userBox").on("change", ".userStatus", function (){
 		selectAll.prop("checked", false);
 	}
 	if(inputs.filter(":checked").length > 0){
-		$("#bulkDelete").show();
+		$("#bulkDelete").attr("disabled", false);
 	}else{
-		$("#bulkDelete").hide();
+		$("#bulkDelete").attr("disabled", true);
 	}
 });
 
