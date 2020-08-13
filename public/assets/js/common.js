@@ -12,4 +12,14 @@ $("#logout").on("click", function (){
       }
     })
   }
+});
+
+//请求登录用户信息
+$.ajax({
+  type: 'get',
+  url: '/users/' + userId,
+  success: function (response){
+    $('.profile .avatar').prop('src', response.avatar);
+    $('.profile .name').html(response.nickName);
+  }
 })
