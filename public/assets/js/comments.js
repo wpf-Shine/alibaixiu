@@ -3,11 +3,10 @@ $.ajax({
     type: 'get',
     url: '/comments',
     success: function (response) {
-        console.log(response);
         var html = template('commentsTpl', response);
         $("#commentsBox").html(html);
    		var pageHTML = template('pageTpl', response);
-   		$("#pageBox").html(html);
+   		$("#pageBox").html(pageHTML);
     }
 });
 
@@ -23,7 +22,7 @@ function changePage(page){
 	        var html = template('commentsTpl', response);
 	        $("#commentsBox").html(html);
 	   		var pageHTML = template('pageTpl', response);
-	   		$("#pageBox").html(html);
+	   		$("#pageBox").html(pageHTML);
 	    }
 	});
 }
