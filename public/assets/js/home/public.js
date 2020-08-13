@@ -88,7 +88,10 @@ $('.search form').on('submit', function(){
 	var key = $(this).find('.keys').val();
 	if(key.trim().length == 0){
 		alert('请输入关键字');
+		return;
+	}else{
+		location.href = '/search.html?key=' + key;
 	}
-	location.href = '/search.html?key=' + key;
+	
 	return false;
 })
