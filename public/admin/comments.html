@@ -33,7 +33,7 @@
       </div>
       <div class="page-action">
         <ul class="pagination pagination-sm pull-right" id="pageBox">
-          
+
         </ul>
       </div>
       <table class="table table-striped table-bordered table-hover">
@@ -101,7 +101,7 @@
       <td>{{$value.author.nickName}}</td>
       <td>{{$value.content}}</td>
       <td>{{$value.post.title}}</td>
-      <td>{{$imports.formateDate($value.craeateAt)}}</td>
+      <td>{{$imports.formateDate($value.createAt)}}</td>
       <td>{{$value.state == 0 ? '未审核' : '已批准'}}</td>
       <td class="text-center">
         <a href="javascript:;" class="btn btn-info btn-xs status" data-status="{{$value.state}}" data-id="{{$value._id}}">
