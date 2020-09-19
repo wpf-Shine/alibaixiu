@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="utf-8">
   <title>Sign in &laquo; Admin</title>
   <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
+
 <body>
   <div class="login">
     <div class="login-wrap">
       <img class="avatar" src="../assets/img/default.png">
       <!-- 有错误信息时展示 -->
-      <!-- <div class="alert alert-danger">
+      <div class="alert alert-danger" id="alertDanger" style="display: none;">
         <strong>错误！</strong> 用户名或密码错误！
-      </div> -->
+      </div>
       <div class="form-group">
         <label for="email" class="sr-only">邮箱</label>
         <input id="email" type="email" class="form-control" placeholder="邮箱" autofocus>
@@ -26,39 +28,44 @@
     </div>
   </div>
   <script src="../assets/vendors/jquery/jquery.min.js"></script>
-  <script type="text/javascript"> 
-      $("#loginBtn").on('click', function (){
-          var email = $("#email").val();
-          var password = $("#password").val();
-          if(email.trim().length == 0){
-            alert('请输入邮箱');
-            return;
+  <script type="text/javascript">
+    $("#loginBtn").on('click', function () {
+      var email = $("#email").val();
+      var password = $("#password").val();
+      if (email.trim().length == 0) {
+        $("#alertDanger").show().html("<strong>错误！</strong> 请输入邮箱地址！");
+        return;
+      }
+      if (password.trim().length == 0) {
+        $("#alertDanger").show().html("<strong>错误！</strong> 请输入密码！");
+        return;
+      }
+      $.ajax({
+        type: 'post',
+        url: '/login',
+        data: {
+          email: email,
+          password: password
+        },
+        success: function (response) {
+          //对角色进行判断
+          if (response.role == 'admin') {
+            location.href = '/admin/index.html';
+          } else {
+            location.href = '/index.html';
           }
-          if(password.trim().length == 0){
-            alert('请输入密码');
-            return;
-          }
-          $.ajax({
-            type: 'post',
-            url: '/login',
-            data: {
-              email: email,
-              password: password
-            },
-            success: function (response){
-              //对角色进行判断
-              if(response.role == 'admin'){
-                 location.href = '/admin/index.html';
-               }else{
-                 location.href = '/index.html';
-               }
-             
-            },
-            error: function (){
-              alert('用户名或者密码错误');
-            }
-          })
+
+        },
+        error: function () {
+          $("#alertDanger").show().html("<strong>错误！</strong> 邮箱地址或者密码错误！");
+        }
       })
+    })
+
+    $("#loginBtn").on("blur", function () {
+      $("#alertDanger").hide();
+    })
   </script>
 </body>
+
 </html>
